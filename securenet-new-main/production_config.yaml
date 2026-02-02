@@ -1,0 +1,129 @@
+# Production LAN Security System Configuration
+# Optimized for real-world deployment without attack simulation
+
+# System-wide production settings
+system:
+  production_mode: true              # Enable production mode
+  simulation_mode: false             # Disable simulation mode
+  attack_simulation_enabled: false   # Explicitly disable attack simulation
+  health_check_interval: 30          # Health check interval in seconds
+  max_component_errors: 3            # Lower threshold for production
+  component_restart_delay: 5         # Faster restart in production
+
+# Enhanced detection for production environment
+detection:
+  arp_rate_threshold: 15             # Slightly higher for production (reduce false positives)
+  mac_learning_threshold: 5          # Very low threshold for lab validation; triggers quickly
+  cam_table_threshold: 0.85          # 85% threshold for production switches
+  dns_ttl_variance_threshold: 600    # 10 minutes variance allowed
+  detection_window_size: 120         # 2-minute window to accumulate MACs
+  detection_latency_target: 50       # Faster detection target (50ms)
+  false_positive_threshold: 0.02     # Lower false positive rate (2%)
+  dns_safe_mode: false               # DISABLED: Allow hard mitigation for DNS spoofing
+
+# Production performance settings
+performance:
+  max_monitored_hosts: 500           # Support larger networks
+  cpu_utilization_threshold: 0.7     # 70% CPU threshold
+  detection_accuracy_threshold: 0.98 # Higher accuracy requirement (98%)
+  mitigation_response_time: 100      # Faster response (100ms)
+  recovery_time_limit: 15            # Faster recovery (15s)
+  max_memory_mb: 2000               # Higher memory limit for production
+
+# Production logging configuration
+logging:
+  log_level: WARNING                 # Production log level (less verbose)
+  log_file: production_security.log  # Production log file
+  log_directory: /opt/securenet/logs # Local application logs
+  max_file_size: 50485760           # 50MB log files
+  backup_count: 10                  # Keep more backups in production
+  console_output: false             # Disable console output in daemon mode
+  syslog_enabled: true              # Enable syslog for production
+  audit_logging: true               # Enable audit logging
+
+# Production network configuration
+network:
+  default_interface: enp0s1          # Production interface
+  capture_buffer_size: 131072        # Larger buffer for production (128KB)
+  packet_timeout: 500               # Faster packet timeout (500ms)
+  promiscuous_mode: true            # Enable promiscuous mode for monitoring
+  capture_filter: ""                # No filter - capture all traffic
+
+# Mitigation strategy configuration
+mitigation:
+  enabled: true                      # Enable automatic mitigation
+  confidence_threshold_alert_only: 0.85  # Alert-only mode threshold (DNS: 0.85, ARP/MAC: execute at 0.85)
+  confidence_threshold_hard: 0.95    # Hard mitigation threshold
+  dns_safe_mode: false              # Allow DNS hard mitigation (if confidence >= 0.95)
+  arp_spoofing_mitigation: true      # Enable ARP spoofing mitigation
+  mac_flooding_mitigation: true      # Enable MAC flooding mitigation
+  dns_spoofing_mitigation: true      # Enable DNS spoofing mitigation
+  mitigation_ttl_seconds: 300        # TTL for mitigation cache (5 minutes)
+  
+# Production alerting system
+alerting:
+  console_alerts: false             # Disable console alerts in production
+  email_alerts: true                # Enable email alerts
+  syslog_alerts: true               # Enable syslog alerts
+  snmp_traps: true                  # Enable SNMP traps
+  webhook_alerts: true              # Enable webhook notifications
+  
+  # Email configuration for production alerts
+  email_smtp_server: "smtp.company.com"
+  email_smtp_port: 587
+  email_use_tls: true
+  email_username: "security-system@company.com"
+  email_recipients: 
+    - "soc@company.com"
+    - "security-team@company.com"
+    - "network-admin@company.com"
+  
+  # Webhook configuration for integration
+  webhook_urls:
+    - "https://siem.company.com/api/alerts"
+    - "https://slack.company.com/hooks/security-alerts"
+
+# Security hardening for production
+security:
+  enable_encryption: true           # Encrypt sensitive data
+  log_integrity_checking: true      # Verify log integrity
+  secure_communications: true       # Use TLS for all communications
+  access_control: true              # Enable access control
+  audit_all_actions: true          # Audit all system actions
+
+# Integration with external systems
+integrations:
+  siem_enabled: true                # Enable SIEM integration
+  siem_endpoint: "https://siem.company.com/api"
+  siem_api_key: "${SIEM_API_KEY}"   # Use environment variable
+  
+  monitoring_enabled: true          # Enable monitoring integration
+  prometheus_endpoint: "http://prometheus:9090"
+  grafana_dashboard: true           # Enable Grafana dashboard
+  
+  threat_intelligence: true         # Enable threat intelligence feeds
+  ti_feeds:
+    - "https://feeds.company.com/iocs"
+    - "https://threat-intel.company.com/api"
+
+# Compliance and audit settings
+compliance:
+  pci_dss_mode: false              # Enable if processing card data
+  hipaa_mode: false                # Enable if processing health data
+  sox_compliance: true             # Enable SOX compliance logging
+  gdpr_compliance: true            # Enable GDPR compliance features
+  retention_days: 2555             # 7 years retention for compliance
+  
+# High availability settings
+high_availability:
+  cluster_mode: false              # Enable for multi-node deployment
+  failover_enabled: true           # Enable automatic failover
+  backup_nodes: []                 # List of backup node IPs
+  heartbeat_interval: 10           # Heartbeat every 10 seconds
+  
+# Resource limits for production
+resources:
+  max_cpu_cores: 4                 # Limit CPU usage
+  max_memory_gb: 8                 # Limit memory usage
+  max_disk_gb: 100                 # Limit disk usage
+  max_network_mbps: 1000           # Network bandwidth limit

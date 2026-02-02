@@ -1,0 +1,55 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg-info/
+*.egg
+.eggs/
+*.coverage
+.coverage*
+htmlcov/
+.pytest_cache/
+.cache/
+.mypy_cache/
+.pytype/
+pip-wheel-metadata/
+build/
+dist/
+*.log
+
+# Environments
+.env
+.env.*
+venv/
+.venv/
+
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# Project logs and runtime outputs
+logs/
+production_security.log
+lan_security.log
+lan_security.log.1
+lan_security.log.2
+*.jsonl
+
+# IDE
+.vscode/
+.idea/
+
+# Frontend build artifacts
+frontend/dist/
+frontend/node_modules/
+frontend/.vite/
+frontend/.turbo/
+frontend/.cache/

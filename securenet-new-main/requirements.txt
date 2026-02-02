@@ -1,0 +1,34 @@
+# Core networking and packet manipulation
+scapy>=2.5.0
+
+# Property-based testing framework
+hypothesis>=6.0.0
+
+# Network utilities
+psutil>=5.9.0
+netifaces>=0.11.0
+
+# Data processing
+pyyaml>=6.0
+pandas>=1.5.0
+numpy>=1.21.0
+
+# Web API dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Authentication and security
+PyJWT>=2.8.0
+passlib>=1.7.4
+
+# HTTP client for testing
+requests>=2.31.0
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=22.0.0
+flake8>=5.0.0
+mypy>=1.0.0

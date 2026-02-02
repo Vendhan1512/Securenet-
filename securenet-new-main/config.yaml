@@ -1,0 +1,54 @@
+# LAN Security System Configuration File
+# This file contains all configuration settings for the system components
+
+# System-wide settings
+system:
+  simulation_mode: true              # Run in simulation mode for testing
+  health_check_interval: 30          # Health check interval in seconds
+  max_component_errors: 5            # Maximum errors before component restart
+  component_restart_delay: 10        # Delay before restarting failed components
+
+# Detection engine configuration
+detection:
+  arp_rate_threshold: 10             # ARP requests per second threshold
+  mac_learning_threshold: 50         # MAC addresses per port threshold
+  cam_table_threshold: 0.9           # CAM table utilization threshold (90%)
+  dns_ttl_variance_threshold: 300    # DNS TTL variance threshold in seconds
+  detection_window_size: 60          # Analysis window size in seconds
+  detection_latency_target: 100      # Target detection latency in milliseconds
+  false_positive_threshold: 0.05     # Maximum acceptable false positive rate (5%)
+
+# Performance and scalability settings
+performance:
+  max_monitored_hosts: 100           # Maximum hosts to monitor per segment
+  cpu_utilization_threshold: 0.8     # Maximum CPU utilization (80%)
+  detection_accuracy_threshold: 0.95 # Minimum detection accuracy (95%)
+  mitigation_response_time: 200      # Maximum mitigation response time in ms
+  recovery_time_limit: 30            # Maximum recovery time in seconds
+  max_memory_mb: 1000               # Maximum memory usage in MB
+
+# Logging configuration
+logging:
+  log_level: INFO                    # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: lan_security.log         # Main log file name
+  log_directory: logs                # Directory for log files
+  max_file_size: 10485760           # Maximum log file size in bytes (10MB)
+  max_log_size: 10MB                # Maximum log size (human readable)
+  backup_count: 5                   # Number of backup log files to keep
+  console_output: true              # Enable console output
+
+# Network configuration
+network:
+  default_interface: eth0            # Default network interface to monitor
+  capture_buffer_size: 65536         # Packet capture buffer size
+  packet_timeout: 1000              # Packet capture timeout in milliseconds
+
+# Alerting system configuration
+alerting:
+  console_alerts: true              # Enable console alerts
+  email_alerts: false               # Enable email alerts
+  email_smtp_server: ""             # SMTP server for email alerts
+  email_smtp_port: 587              # SMTP port
+  email_username: ""                # SMTP username
+  email_password: ""                # SMTP password (use environment variable in production)
+  email_recipients: []              # List of email recipients
